@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Редактор дисциплин</title>
+    <div th:replace="~{commons :: head}"></div>
+</head>
+<body>
+<div th:replace="~{commons :: nav}"></div>
+
+<section class="entity-addEdit" id="entity-addEdit">
+    <div class="container">
+        <form action="/disciplines/create" method="POST" th:object="${entity}">
+            <div class="row">
+                <div class="col">
+                    <h3>Создание / Редактирование дисциплин</h3>
+                </div>
+            </div>
+            <div class="row mainContainer blogBetween">
+                <div class="col-md-12">
+                    <table class="editTable ">
+                        <tbody>
+                        <tr>
+                            <th><label class="mx-2">Название</label></th>
+                            <td><input type="text" th:field="*{name}" class="form-control" required/></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <p class="my-5 between">
+                        <input type="hidden" id="id" th:field="*{id}">
+                        <input type="button" class="myButton" value="Назад" onclick="history.back()"/>
+                        <input type="submit" class="myButton" value="Отправить">
+                    </p>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
+
+<div th:replace="~{commons :: footer}"></div>
+</body>
+</html>

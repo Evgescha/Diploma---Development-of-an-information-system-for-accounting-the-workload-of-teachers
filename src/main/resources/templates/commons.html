@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta th:fragment="head">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="/css/fontawesome.v5.4.1.css">
+    <script src="/js/kit.fontawesome.45c42265a1.js"></script>
+    <script src="/js/jquery-3.5.1.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="/css/myStyle.css">
+    </meta>
+</head>
+
+<body>
+
+<header id="header" class="header" th:fragment="nav">
+    <div class="container">
+        <div class="row">
+            <div class="col p-0">
+                <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                                data-target="#navbarTogglerDemo01" aria-expanded="false">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                    </div>
+                    <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+                        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                            <li class="nav-item">
+                                <a class="nav-link" href="/tableRows">Нагрузка</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/departments">Кафедры</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/facultys">Факультеты</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/specialitys">Специальности</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/tableRowDates">Периоды</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/disciplines">Дисциплины</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/teachers">Преподаватели</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/trainingForms">Формы обучения</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/groups">Группы</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/">Загрузка и парсинг</a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+<footer id="footer" class="inverce-color" th:fragment="footer">
+    <div class="container text-center-cus">
+        Сделано с любовью
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            const getSort = ({ target }) => {
+                const order = (target.dataset.order = -(target.dataset.order || -1));
+                const index = [...target.parentNode.cells].indexOf(target);
+                const collator = new Intl.Collator(['en', 'ru'], { numeric: true });
+                const comparator = (index, order) => (a, b) => order * collator.compare(
+                    a.children[index].innerHTML,
+                    b.children[index].innerHTML
+                );
+
+                for(const tBody of target.closest('table').tBodies)
+                    tBody.append(...[...tBody.rows].sort(comparator(index, order)));
+
+                for(const cell of target.parentNode.cells)
+                    cell.classList.toggle('sorted', cell === target);
+            };
+
+            document.querySelectorAll('table thead').forEach(tableTH => tableTH.addEventListener('click', () => getSort(event)));
+
+        });
+    </script>
+</footer>
+
+</body>
+</html>

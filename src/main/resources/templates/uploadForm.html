@@ -1,0 +1,42 @@
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>Загрузка файлов</title>
+    <div th:replace="~{commons :: head}"></div>
+</head>
+<body>
+<div th:replace="~{commons :: nav}"></div>
+<section>
+    <div class="container">
+        <div th:if="${message}">
+            <h2 th:text="${message}"/>
+        </div>
+
+        <div>
+            <form method="POST" enctype="multipart/form-data" action="/">
+                <table>
+                    <tr>
+                        <td>Выберите файл:</td>
+                        <td><input type="file" name="file" accept=".xls"/></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><input type="submit" value="Загрузить и спарсить"/></td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+
+        <h4>Перед каждйм запуском приложения все загруженные файлы удаляются (данные а базе данных остаются)</h4>
+        <h5>Список файлов текущей сессии</h5>
+        <div>
+            <ul>
+                <li th:each="file : ${files}">
+                    <a th:href="${file}" th:text="${file}"/>
+                </li>
+            </ul>
+        </div>
+    </div>
+</section>
+<div th:replace="~{commons :: footer}"></div>
+</body>
+</html>

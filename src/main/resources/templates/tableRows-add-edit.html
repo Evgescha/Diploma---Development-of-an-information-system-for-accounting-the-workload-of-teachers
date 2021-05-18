@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Редактор нагрузки</title>
+    <div th:replace="~{commons :: head}"></div>
+</head>
+<body>
+<div th:replace="~{commons :: nav}"></div>
+
+<section class="entity-addEdit" id="entity-addEdit">
+    <div class="container">
+        <form action="/tableRows/create" method="POST" th:object="${entity}">
+            <div class="row">
+                <div class="col">
+                    <h3>Создание / Редактирование нагрузки</h3>
+                </div>
+            </div>
+            <div class="row mainContainer blogBetween">
+                <div class="col-md-12">
+                    <table class="editTable ">
+                        <tbody>
+                        <tr>
+                            <select class="form-control" name="table_row_date_id" id="" required>
+                                <option th:if="${entity.tableRowDate==null}" th:each="temp : ${dates}"
+                                        th:value="${temp.id}" th:text="${temp}"
+                                        th:selected="${entity.tableRowDate==temp}">
+                                </option>
+                                <option th:if="${entity.tableRowDate!=null}" th:each="temp : ${dates}"
+                                        th:value="${temp.id}" th:text="${temp}"
+                                        th:selected="${entity.tableRowDate.id==temp.id}">
+                                </option>
+                            </select>
+                        </tr>
+                        <tr>
+                            <select class="form-control" name="teacher_id" id="" required>
+                                <option th:if="${entity.teacher==null}" th:each="temp : ${teachers}"
+                                        th:value="${temp.id}" th:text="${temp.name}"
+                                        th:selected="${entity.teacher==temp}">
+                                </option>
+                                <option th:if="${entity.teacher!=null}" th:each="temp : ${teachers}"
+                                        th:value="${temp.id}" th:text="${temp.name}"
+                                        th:selected="${entity.teacher.id==temp.id}">
+                                </option>
+                            </select>
+                        </tr>
+                        <tr>
+                            <select class="form-control" name="discipline_id" id="" required>
+                                <option th:if="${entity.discipline==null}" th:each="temp : ${disciplines}"
+                                        th:value="${temp.id}" th:text="${temp.name}"
+                                        th:selected="${entity.discipline==temp}">
+                                </option>
+                                <option th:if="${entity.discipline!=null}" th:each="temp : ${disciplines}"
+                                        th:value="${temp.id}" th:text="${temp.name}"
+                                        th:selected="${entity.discipline.id==temp.id}">
+                                </option>
+                            </select>
+                        </tr>
+                        <tr>
+                            <select class="form-control" name="group_id" id="" required>
+                                <option th:if="${entity.group==null}" th:each="temp : ${groups}"
+                                        th:value="${temp.id}" th:text="${temp}"
+                                        th:selected="${entity.group==temp}">
+                                </option>
+                                <option th:if="${entity.group!=null}" th:each="temp : ${groups}"
+                                        th:value="${temp.id}" th:text="${temp}"
+                                        th:selected="${entity.group.id==temp.id}">
+                                </option>
+                            </select>
+                        </tr>
+                        <tr>
+                            <th><label class="mx-2">Номер потока</label></th>
+                            <td><input type="text" th:field="*{threadNumber}" class="form-control" required/></td>
+                        </tr>
+                        <tr>
+                            <th><label class="mx-2">Количество потоков</label></th>
+                            <td><input type="text" th:field="*{threadCount}" class="form-control" required/></td>
+                        </tr>
+                        <tr>
+                            <th><label class="mx-2">Лекций</label></th>
+                            <td><input type="text" th:field="*{lectureCount}" class="form-control" required/></td>
+                        </tr>
+                        <tr>
+                            <th><label class="mx-2">Практических</label></th>
+                            <td><input type="text" th:field="*{practicalCount}" class="form-control" required/></td>
+                        </tr>
+                        <tr>
+                            <th><label class="mx-2">Лабораторных</label></th>
+                            <td><input type="text" th:field="*{laboratoryCount}" class="form-control" required/></td>
+                        </tr>
+                        <tr>
+                            <th><label class="mx-2">Консультации</label></th>
+                            <td><input type="text" th:field="*{consultationCount}" class="form-control" required/></td>
+                        </tr>
+                        <tr>
+                            <th><label class="mx-2">Экзамены</label></th>
+                            <td><input type="text" th:field="*{exam}" class="form-control" required/></td>
+                        </tr>
+                        <tr>
+                            <th><label class="mx-2">Просмотры</label></th>
+                            <td><input type="text" th:field="*{watching}" class="form-control" required/></td>
+                        </tr>
+                        <tr>
+                            <th><label class="mx-2">Диф. зачеты</label></th>
+                            <td><input type="text" th:field="*{differencialZachet}" class="form-control" required/></td>
+                        </tr>
+                        <tr>
+                            <th><label class="mx-2">Зачеты</label></th>
+                            <td><input type="text" th:field="*{zachet}" class="form-control" required/></td>
+                        </tr>
+                        <tr>
+                            <th><label class="mx-2">РГР</label></th>
+                            <td><input type="text" th:field="*{rgr}" class="form-control" required/></td>
+                        </tr>
+                        <tr>
+                            <th><label class="mx-2">Курсовые работы</label></th>
+                            <td><input type="text" th:field="*{courseWork}" class="form-control" required/></td>
+                        </tr>
+                        <tr>
+                            <th><label class="mx-2">Курсовые проекты</label></th>
+                            <td><input type="text" th:field="*{courseProject}" class="form-control" required/></td>
+                        </tr>
+                        <tr>
+                            <th><label class="mx-2">Контрольные работы</label></th>
+                            <td><input type="text" th:field="*{controlWork}" class="form-control" required/></td>
+                        </tr>
+                        <tr>
+                            <th><label class="mx-2">Индивидуальные работы</label></th>
+                            <td><input type="text" th:field="*{individualWork}" class="form-control" required/></td>
+                        </tr>
+                        <tr>
+                            <th><label class="mx-2">Другие работы</label></th>
+                            <td><input type="text" th:field="*{otherWork}" class="form-control" required/></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <p class="my-5 between">
+                        <input type="hidden" id="id" th:field="*{id}">
+                        <input type="button" class="myButton" value="Назад" onclick="history.back()"/>
+                        <input type="submit" class="myButton" value="Отправить">
+                    </p>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
+
+<div th:replace="~{commons :: footer}"></div>
+</body>
+</html>
